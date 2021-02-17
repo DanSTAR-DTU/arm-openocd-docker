@@ -1,10 +1,9 @@
-'''
-    File name: AOD Dockerfile
-    Author: Steven Macías
-    Github: StevenMacias
-    Date created: 12/02/2021
-    Date last modified: 13/02/2021
-'''
+# File name: AOD Dockerfile
+# Author: Steven Macías
+# Github: StevenMacias
+# Date created: 12/02/2021
+# Date last modified: 13/02/2021
+
 FROM ubuntu:latest
 
 # Environment variables for binaries

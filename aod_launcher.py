@@ -115,18 +115,21 @@ def executeDockerCommands():
         logging.info("--- Build Docker Image ---")
         cmd = cmd_docker_build
         logging.info(cmd)
-        if (args.device and args.project_full_path):
-            os.system(cmd)
-        else:
-            logging.error("Missing --device or --project-full-path.")
+        os.system(cmd)
 
     if args.run_container:
         logging.info("--- Run Docker Image ---")
+
+        # Linux / Mac
         if operating_system == "linux" or operating_system == "mac":
-            args_device_docker_linux_filled = args_device_docker_linux % args.device
+            if args.device:
+                args_device_docker_linux_filled = args_device_docker_linux % args.device
+            else:
+                args_device_docker_linux_filled = ""
             cmd = cmd_run_container % (args_device_docker_linux_filled, args.project_full_path, container_name, image_name, version)
+        # Windows
         else:
-            args_device_docker_windows_filled = args_device_docker_linux % args.device
+            args_device_docker_windows_filled = args_device_docker_windows % args.device
             cmd = cmd_run_container % (args_device_docker_windows_filled, args.project_full_path, container_name, image_name, version)
         logging.info(cmd)
         os.system(cmd)
