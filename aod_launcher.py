@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
     File name: aod_launcher.py
-    Author: Steven Macías
+    Author: Steven Macias 
     Github: StevenMacias
     Date created: 12/02/2021
     Date last modified: 13/02/2021
