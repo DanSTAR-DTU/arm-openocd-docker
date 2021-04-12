@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
     File name: aod_launcher.py
-    Author: Steven Macias 
+    Author: Steven Macias
     Github: StevenMacias
     Date created: 12/02/2021
     Date last modified: 13/02/2021
@@ -86,11 +86,18 @@ def argsDefinition():
 
     parser.add_argument('--get-console', action='store_true',
         help="Get container console")
+
+    parser.add_argument('--set-container-name', required=False,
+        help="Set container name")
     args = parser.parse_args()
     logging.debug(args)
 
 def executeDockerCommands():
     logging.info("Docker found in PATH")
+    if args.set_container_name:
+        logging.info("--- Setting custom container name ---")
+        container_name = args.set_container_name
+        logging.info(container_name)
     if args.stop_container:
         logging.info("--- Stop Docker Container ---")
         cmd = cmd_stop_container
