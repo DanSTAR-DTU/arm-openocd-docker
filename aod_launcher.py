@@ -35,6 +35,19 @@ args_device_docker_windows = "--device=%s"
 cmd_run_container = "docker run -itd %s --volume=%s:/workspace --name %s %s:%s"""
 cmd_get_console = "docker exec -it %s /bin/zsh" % container_name
 
+def updateContainerNames(new_container_name):
+    global container_name
+    global cmd_stop_container
+    global cmd_start_container
+    global cmd_remove_container
+    global cmd_get_console
+    container_name = new_container_name
+    cmd_stop_container = "docker stop "+ container_name
+    cmd_start_container = "docker start "+ container_name
+    cmd_remove_container = "docker rm "+ container_name  
+    cmd_get_console = "docker exec -it %s /bin/zsh" % container_name
+
+
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
     # from whichcraft import which
@@ -93,10 +106,11 @@ def argsDefinition():
     logging.debug(args)
 
 def executeDockerCommands():
+    global container_name
     logging.info("Docker found in PATH")
     if args.set_container_name:
         logging.info("--- Setting custom container name ---")
-        container_name = args.set_container_name
+        updateContainerNames(args.set_container_name)
         logging.info(container_name)
     if args.stop_container:
         logging.info("--- Stop Docker Container ---")
